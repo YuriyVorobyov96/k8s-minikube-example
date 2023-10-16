@@ -1,0 +1,15 @@
+NUM,Node,OS,Programs,Address
+1,web-tech Control plane,linux amd64 image Buildroot 2021.02.12,"- coredns
+- kindnet
+- kube-proxy
+- storage-provisioner
+- etcd
+- kube-apiserver
+- kube-controller-manager
+- kube-scheduler",192.168.59.110 
+2,web-tech-m02,linux amd64 image Buildroot 2021.02.12,"- metrics-scraper
+- kubernetes-dashboard
+- kindnet
+- kube-proxy-mhtsb
+- postgres 13
+- web-app (application)",192.168.59.111
