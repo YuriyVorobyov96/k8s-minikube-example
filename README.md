@@ -41,8 +41,6 @@ psql -U vehicle_quotes
 
 4) Start WebApp:
 ```
-minikube kubectl -- apply -f k8s/web-persistent-volume.yml
-minikube kubectl -- apply -f k8s/web-persistent-volume-claim.yml
 minikube kubectl -- apply -f k8s/web-deployment.yml
 minikube kubectl -- apply -f k8s/web-service.yml
 
