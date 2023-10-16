@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: psql-deployment
+  labels:
+    app: psql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: psql
+  template:
+    metadata:
+      labels:
+        app: psql
+    spec:
+      containers:
+        - name: psql
+          image: postgres:13
+          ports:
+            - containerPort: 5432
+              name: "postgres"
+          volumeMounts:
+            # - mountPath: "/var/lib/postgresql/data"
+            - mountPath: "/Users/a2seven/Documents/Workspace/k8s_test/postgresql/data"
+              name: psql-data-storage
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: psql-secret
+                  key: database
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: psql-secret
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: psql-secret
+                  key: password
+      volumes:
+        - name: psql-data-storage
+          persistentVolumeClaim:
+            claimName: psql-data-persisent-volume-claim

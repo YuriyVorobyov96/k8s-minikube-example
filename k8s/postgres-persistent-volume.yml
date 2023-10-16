@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: psql-data-persisent-volume
+  labels:
+    type: local
+spec:
+  claimRef:
+    namespace: default
+    name: psql-data-persisent-volume-claim
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/Users/a2seven/Documents/Workspace/k8s_test"
