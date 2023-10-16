@@ -21,8 +21,7 @@ spec:
             - containerPort: 5432
               name: "postgres"
           volumeMounts:
-            # - mountPath: "/var/lib/postgresql/data"
-            - mountPath: "/Users/a2seven/Documents/Workspace/k8s_test/postgresql/data"
+            - mountPath: "/var/lib/postgresql/data"
               name: psql-data-storage
           env:
             - name: POSTGRES_DB

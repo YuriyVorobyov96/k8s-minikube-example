@@ -14,4 +14,4 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/Users/a2seven/Documents/Workspace/k8s_test"
+    path: "/data/db"

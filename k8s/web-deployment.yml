@@ -24,10 +24,6 @@ spec:
               name: "http"
             - containerPort: 5001
               name: "https"
-          volumeMounts:
-            # - mountPath: "/app"
-            - mountPath: "/Users/a2seven/Documents/Workspace/k8s_test/app"
-              name: webapp-source-code-storage
           env:
             - name: POSTGRES_DB
               valueFrom:
@@ -51,7 +47,3 @@ spec:
                   key: psql-url
             - name: CUSTOMCONNSTR_VehicleQuotesContext
               value: Host=$(DB_URL);Database=$(POSTGRES_DB);Username=$(POSTGRES_USER);Password=$(POSTGRES_PASSWORD)
-      volumes:
-        - name: webapp-source-code-storage
-          persistentVolumeClaim:
-            claimName: webapp-source-code-persisent-volume-claim
