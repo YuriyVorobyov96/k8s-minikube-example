@@ -1,0 +1,32 @@
+# Build the image with:
+#   docker build -f Dockerfile.prod -t vehicle-quotes-prod .
+#
+# Run a container based on the image:
+#   docker run -d --name vehicle-quotes-prod --network host vehicle-quotes-prod
+#
+# Connect to the container:
+#   docker exec -it vehicle-quotes-prod bash
+#
+# Build the image for k8s registry:
+#   docker build . -f Dockerfile.prod -t localhost:32000/vehicle-quotes-prod:registry
+#
+# Push to k8s registry:
+#   docker push localhost:32000/vehicle-quotes-prod:registry
+
+ARG VARIANT="5.0"
+FROM mcr.microsoft.com/dotnet/sdk:${VARIANT}
+
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install --no-install-recommends postgresql-client-common postgresql-client
+
+RUN dotnet tool install --global dotnet-ef
+ENV PATH $PATH:/root/.dotnet/tools
+
+RUN dotnet dev-certs https
+
+WORKDIR /source
+
+COPY . .
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]
+
